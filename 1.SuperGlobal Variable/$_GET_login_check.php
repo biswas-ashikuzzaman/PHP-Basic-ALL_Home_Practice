@@ -8,10 +8,10 @@
 <body>
     <form action="" method="get">
         <label for="Username">Username:
-            <input type="text" name="Username" id="Username">
+            <input type="text" name="Username" id="Username" required>
         </label> <br> <br>
         <label for="Password">Password:
-            <input type="password" name="Password" id="Password">
+            <input type="password" name="Password" id="Password" required>
         </label> <br> <br>
         <input type="submit" name="" id="" value="Login">
         </label>
