@@ -28,5 +28,17 @@
     }
     
     ?>
+    
+    <?php
+    if (isset($_GET['Username']) && isset($_GET['Password'])){
+        $username1=$_GET('Username');
+        $password1=$_GET('Password');
+        if ($username1 == "admin" && $password1 == "1234") {
+            echo "<h2>Login successful!</h2>";
+        } else {
+            echo "<h2>Invalid credentials, please try again.</h2>";
+        }
+    }
+    ?>
 </body>
 </html>
