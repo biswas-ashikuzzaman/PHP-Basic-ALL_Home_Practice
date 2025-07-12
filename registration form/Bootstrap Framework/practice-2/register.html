@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="form-body">
+    <div class="form-holder">
+      <div class="form-content">
+        <div class="form-items">
+          <h3>Register Today</h3>
+          <p>Fill in the data below.</p>
+          <form method="post" action="register.php">
+            <input class="form-control" type="text" name="name" placeholder="Full Name" required />
+            <input class="form-control" type="email" name="email" placeholder="E-mail Address" required />
+
+            <select class="form-select mt-3" name="position" required>
+              <option selected disabled value="">Select Position</option>
+              <option value="jweb">Junior Web Developer</option>
+              <option value="sweb">Senior Web Developer</option>
+              <option value="pmanager">Project Manager</option>
+            </select>
+
+            <input class="form-control" type="password" name="password" placeholder="Password" required />
+
+            <div class="gender-group">
+              <label>Gender:</label><br />
+              <input type="radio" name="gender" value="male" required /> Male
+              <input type="radio" name="gender" value="female" required /> Female
+              <input type="radio" name="gender" value="secret" required /> Secret
+            </div>
+
+            <div class="confirm-checkbox">
+              <input type="checkbox" required />
+              <label>I confirm that all data are correct</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+          <br />
+          <a href="login.html" class="login-link">Already registered? Login here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

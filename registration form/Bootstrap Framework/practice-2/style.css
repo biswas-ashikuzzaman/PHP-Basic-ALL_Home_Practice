@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #152733;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-body {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.form-holder {
+  background-color: #1e2a38;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  padding: 30px;
+}
+
+.form-content h3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.form-content p {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.form-items {
+  width: 100%;
+}
+
+input.form-control,
+select.form-select {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: none;
+  font-size: 15px;
+  color: #333;
+}
+
+select.form-select {
+  background-color: #fff;
+  color: #555;
+}
+
+.gender-group {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.gender-group input {
+  margin-right: 5px;
+  margin-left: 10px;
+}
+
+.confirm-checkbox {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background-color: #6c757d;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #495057;
+}
+
+.login-link {
+  color: #a3d3f3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
