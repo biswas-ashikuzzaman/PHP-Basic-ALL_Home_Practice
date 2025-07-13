@@ -98,3 +98,17 @@ select.form-select {
 .login-link:hover {
   text-decoration: underline;
 }
+ /* file upload  */
+ .upload-label {
+  display: block;
+  margin: 15px 0 5px;
+  color: #333;
+}
+
+input[type="file"] {
+  padding: 8px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
