@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+$error = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email    = $_POST['email'];
     $password = $_POST['password'];
@@ -15,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($email === $stored_email && password_verify($password, $hashed_password)) {
                 $found = true;
 
-                // Store user info in session
                 $_SESSION['user'] = [
                     'name' => $name,
                     'email' => $stored_email,
@@ -30,7 +31,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (!$found) {
-        echo "❌ Invalid email or password. <a href='login.html'>Try again</a>";
+        $error = "Invalid email or password.";
     }
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="style_login.css">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+
+    <?php if (!empty($error)): ?>
+      <div class="error-alert"><?php echo $error; ?></div>
+    <?php endif; ?>
+
+    <form method="post" action="login.php">
+      <label>Email:</label>
+      <input type="email" name="email" required><br><br>
+
+      <label>Password:</label>
+      <input type="password" name="password" required><br><br>
+
+      <input type="submit" value="Login">
+    </form>
+
+    <a href="register.html">Don't have an account? Register</a>
+  </div>
+</body>
+</html>
