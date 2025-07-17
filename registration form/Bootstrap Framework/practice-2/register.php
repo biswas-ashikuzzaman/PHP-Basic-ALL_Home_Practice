@@ -1,92 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registration with Display</title>
+    <title>Register with File Preview</title>
     <style>
-        form {
-            margin-bottom: 20px;
+        img, iframe {
+            margin-top: 10px;
+            max-height: 100px;
         }
         table, th, td {
-            border: 1px solid #000;
+            border: 1px solid black;
             border-collapse: collapse;
-            padding: 6px 10px;
+            padding: 8px;
         }
         th {
-            background: #f0f0f0;
-        }
-        img {
-            height: 60px;
-        }
-        iframe {
-            height: 60px;
-            width: 100px;
+            background-color: #eee;
         }
     </style>
 </head>
 <body>
 
-<h2>Register Here</h2>
-<form action="" method="post" enctype="multipart/form-data">
-    Name:     <input type="text" name="name" required><br><br>
-    Email:    <input type="email" name="email" required><br><br>
+<h2>Register Form</h2>
+
+<form method="post" enctype="multipart/form-data">
+    Name: <input type="text" name="name" required><br><br>
+    Email: <input type="email" name="email" required><br><br>
     Position: <input type="text" name="position" required><br><br>
     Password: <input type="password" name="password" required><br><br>
-    Gender: 
-        <input type="radio" name="gender" value="Male" required> Male
-        <input type="radio" name="gender" value="Female"> Female<br><br>
-    Upload File: <input type="file" name="upload_file" required><br><br>
+    Gender:
+    <input type="radio" name="gender" value="Male" required> Male
+    <input type="radio" name="gender" value="Female"> Female<br><br>
+    
+    Upload File: 
+    <input type="file" name="upload_file" id="upload_file" accept=".jpg,.jpeg,.png,.pdf" required><br>
+    <div id="preview"></div><br>
+
     <input type="submit" value="Register">
 </form>
+
+<hr>
 
 <?php
 $file_path = "users.txt";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name     = $_POST['name'];
-    $email    = $_POST['email'];
-    $position = $_POST['position'];
-    $password = $_POST['password'];
-    $gender   = $_POST['gender'];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $name     = $_POST["name"];
+    $email    = $_POST["email"];
+    $position = $_POST["position"];
+    $password = $_POST["password"];
+    $gender   = $_POST["gender"];
 
     $upload_dir = "uploads/";
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0755, true);
     }
 
-    $file_name = $_FILES['upload_file']['name'];
-    $file_tmp  = $_FILES['upload_file']['tmp_name'];
-    $file_ext  = pathinfo($file_name, PATHINFO_EXTENSION);
-    $allowed   = ['pdf', 'jpg', 'jpeg', 'png'];
+    $file = $_FILES["upload_file"];
+    $file_name = $file["name"];
+    $tmp_name  = $file["tmp_name"];
+    $file_size = $file["size"];
+    $file_ext  = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+    $allowed   = ["jpg", "jpeg", "png", "pdf"];
+    $max_size  = 2 * 1024 * 1024; // 2MB
 
-    if (!in_array(strtolower($file_ext), $allowed)) {
-        echo "<p style='color:red;'>❌ Invalid file type. Only PDF, JPG, JPEG, PNG allowed.</p>";
+    if (!in_array($file_ext, $allowed)) {
+        echo "<p style='color:red;'>❌ Invalid file type. Only JPG, JPEG, PNG, PDF allowed.</p>";
+    } elseif ($file_size > $max_size) {
+        echo "<p style='color:red;'>❌ File too large. Max 2MB allowed.</p>";
     } else {
         $new_file_name = uniqid("file_", true) . "." . $file_ext;
         $destination = $upload_dir . $new_file_name;
 
-        if (move_uploaded_file($file_tmp, $destination)) {
-
-            $exists = false;
-            if (file_exists($file_path)) {
-                $lines = file($file_path);
-                foreach ($lines as $line) {
-                    $fields = explode("|", trim($line));
-                    if ($fields[1] === $email) {
-                        $exists = true;
-                        break;
-                    }
-                }
-            }
-
-            if ($exists) {
-                echo "<p style='color:red;'>❌ Email already registered.</p>";
-            } else {
-                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                $userData = "$name|$email|$position|$hashed_password|$gender|$new_file_name\n";
-                file_put_contents($file_path, $userData, FILE_APPEND);
-                echo "<p style='color:green;'>✅ Registration successful!</p>";
-            }
-
+        if (move_uploaded_file($tmp_name, $destination)) {
+            // Save to file
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $data = "$name|$email|$position|$hashed_password|$gender|$new_file_name\n";
+            file_put_contents($file_path, $data, FILE_APPEND);
+            echo "<p style='color:green;'>✅ Registration successful!</p>";
         } else {
             echo "<p style='color:red;'>❌ File upload failed.</p>";
         }
@@ -95,8 +84,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Display table
 if (file_exists($file_path)) {
-    $lines = file($file_path);
-    if (count($lines) > 0) {
+    $lines = file($file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if (!empty($lines)) {
         echo "<h3>All Registered Users</h3>";
         echo "<table>
                 <tr>
@@ -104,10 +93,10 @@ if (file_exists($file_path)) {
                     <th>Email</th>
                     <th>Position</th>
                     <th>Gender</th>
-                    <th>Uploaded File Preview</th>
+                    <th>File Preview</th>
                 </tr>";
         foreach ($lines as $line) {
-            $fields = explode("|", trim($line));
+            $fields = explode("|", $line);
             $file = "uploads/" . $fields[5];
             $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 
@@ -117,26 +106,50 @@ if (file_exists($file_path)) {
                     <td>{$fields[2]}</td>
                     <td>{$fields[4]}</td>
                     <td>";
-
             if (in_array($ext, ['jpg', 'jpeg', 'png'])) {
-                echo "<img src='$file' alt='Image'>";
-            } elseif ($ext == 'pdf') {
+                echo "<img src='$file'>";
+            } elseif ($ext === 'pdf') {
                 echo "<iframe src='$file'></iframe>";
             } else {
                 echo "File";
             }
-
             echo "</td></tr>";
         }
         echo "</table>";
-
-        // 🔗 Link to register form (refresh current page)
-        // 🔗 Link to main register page (e.g., register.html)
-echo "<br><a href='register.html'>➕ Go to Register Form</a>";
-
     }
 }
 ?>
+
+<!-- ✅ JavaScript for Live File Preview -->
+<script>
+document.getElementById("upload_file").addEventListener("change", function(event) {
+    const preview = document.getElementById("preview");
+    preview.innerHTML = "";
+
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const ext = file.name.split('.').pop().toLowerCase();
+    const allowed = ['jpg', 'jpeg', 'png', 'pdf'];
+    if (!allowed.includes(ext)) {
+        preview.innerHTML = "<p style='color:red;'>❌ Invalid file type.</p>";
+        return;
+    }
+
+    const url = URL.createObjectURL(file);
+    if (['jpg', 'jpeg', 'png'].includes(ext)) {
+        const img = document.createElement("img");
+        img.src = url;
+        preview.appendChild(img);
+    } else if (ext === 'pdf') {
+        const iframe = document.createElement("iframe");
+        iframe.src = url;
+        iframe.width = "200";
+        iframe.height = "100";
+        preview.appendChild(iframe);
+    }
+});
+</script>
 
 </body>
 </html>
