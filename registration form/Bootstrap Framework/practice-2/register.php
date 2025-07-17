@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register with File Preview</title>
+    <title>Register</title>
     <style>
         img, iframe {
             margin-top: 10px;
@@ -16,11 +16,11 @@
             background-color: #eee;
         }
     </style>
+    
 </head>
 <body>
 
 <h2>Register Form</h2>
-
 <form method="post" enctype="multipart/form-data">
     Name: <input type="text" name="name" required><br><br>
     Email: <input type="email" name="email" required><br><br>
