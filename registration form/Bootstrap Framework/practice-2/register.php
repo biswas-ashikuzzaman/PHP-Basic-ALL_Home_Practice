@@ -109,47 +109,16 @@ if (file_exists($file_path)) {
             if (in_array($ext, ['jpg', 'jpeg', 'png'])) {
                 echo "<img src='$file'>";
             } elseif ($ext === 'pdf') {
-                echo "<iframe src='$file'></iframe>";
+                echo "<iframe src='$file' width='100'></iframe>";
             } else {
                 echo "File";
             }
             echo "</td></tr>";
         }
         echo "</table>";
+
+        // ✅ Add link to main register page
+        echo "<br><a href='register.html'>🔙 Go to Main Register Form</a>";
     }
 }
 ?>
-
-<!-- ✅ JavaScript for Live File Preview -->
-<script>
-document.getElementById("upload_file").addEventListener("change", function(event) {
-    const preview = document.getElementById("preview");
-    preview.innerHTML = "";
-
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const ext = file.name.split('.').pop().toLowerCase();
-    const allowed = ['jpg', 'jpeg', 'png', 'pdf'];
-    if (!allowed.includes(ext)) {
-        preview.innerHTML = "<p style='color:red;'>❌ Invalid file type.</p>";
-        return;
-    }
-
-    const url = URL.createObjectURL(file);
-    if (['jpg', 'jpeg', 'png'].includes(ext)) {
-        const img = document.createElement("img");
-        img.src = url;
-        preview.appendChild(img);
-    } else if (ext === 'pdf') {
-        const iframe = document.createElement("iframe");
-        iframe.src = url;
-        iframe.width = "200";
-        iframe.height = "100";
-        preview.appendChild(iframe);
-    }
-});
-</script>
-
-</body>
-</html>
