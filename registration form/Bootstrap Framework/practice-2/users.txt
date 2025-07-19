@@ -1,8 +1,2 @@
-Ashik Biswas|siammahmud722@gmail.com|jweb|$2y$10$TzQZy3.r47r86CAAZOFY1uhYJNyLTr8CzrDNAgT6dsidMaNO6/VbS|male
-Ashik Biswas|cjnvtorg@gmail.com|jweb|$2y$10$U9yhvTpsmhAfPaZUOtU58u7XV2eaMCJ7Kh9is4.UylhSSpC6j341e|male
-Ashikuzzaman Biswas|ashikuzzaman872@gmail.com|jweb|$2y$10$9vzjyqorHW65tg3qW73fz.tdxZ5Y2MNNqmQM7Y0Xd9m5ywG.tJ3IC|male
-Ashikuzzaman Biswas|ashikuzzaman873@gmail.com|jweb|$2y$10$oTAk.knm0J.kuRVd6Gy4FuKJdfU0JRYz0.4.dM.H6N2mAwq.OQiFO|male
-Ashikuzzaman Biswas|ashikuzzaman874@gmail.com|jweb|$2y$10$RM3lCSZTSTXuX..oJlEVdOQy9tfITxFFJAvTF3Lj3YL5V4dKGA8d2|male
-Sadia Hossain|sadia2@gmail.com|jweb|$2y$10$9NG6ponq7AKyasjPpvDA8e5PLKHvC1Eu6bK7gsEYwIyhdXc9Q/lky|female
-Sabbir khan|sabbir2@gmai.com|jweb|$2y$10$qENpZ2ttic18LGI19zdNOu3J9Q9hm2R7DwYoBlZ2rPuz7Zw16G7gi|male|file_68739b4a050b23.03861580.png
-sa rafi|rafi2@gmail.com|jweb|$2y$10$HRjerFvXA7ckfEevklGPROu4ncucT9MH61bd1dplzVNmBVj1VJo/q|male|file_68739c427ca644.49519003.jpg
+Ashikuzzaman Biswas|ashikuzzam@gmail.com|jweb|$2y$10$2zImYe3oKbbxv7W3jdAZwuJP25Nv/f7EqaCeXHNKfheDY.irRi2s2|male|file_6878884aec98b7.99702485.jpg
+Ashikuzzaman Biswas|ashikuzzaman872@gmail.com|pmanager|$2y$10$QGPuXxYUzKk5dRqin2uwVeFxjR0oxnW4xS33ZYZ9lFh7QCOrLI8Tu|male|file_687888ac2b27e7.35123852.jpg
